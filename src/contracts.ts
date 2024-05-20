@@ -1,3 +1,4 @@
+// src/contracts.ts
 import CreateNftAbi from './abis/CreateNft.json';
 import CommentsAbi from './abis/Comments.json';
 import EventManagerAbi from './abis/EventManager.json';
@@ -26,7 +27,7 @@ export const contracts: { [key: string]: { [key: string]: ContractConfig } } = {
             abi: EventManagerAbi.abi as AbiItem[]
         },
         NFTMarketplace: {
-            address: "0x580423A4CF059eA13Bfaa101ea48bEBe81aa23A9",
+            address: "0x53Fdf651943a91C82a66D1b88f9287867401f723",
             abi: NFTMarketplaceAbi.abi as AbiItem[]
         },
         NFTBids: {
@@ -34,7 +35,7 @@ export const contracts: { [key: string]: { [key: string]: ContractConfig } } = {
             abi: NFTBidsAbi.abi as AbiItem[]
         },
         NFTWithRoyalties: {
-            address: "",  // Adresse manquante à ajouter
+            address: "0x1E2397aF297d9C96123Dd983d5921c29bba15577",  // Adresse manquante à ajouter
             abi: NFTWithRoyaltiesAbi.abi as AbiItem[]
         }
     },
@@ -52,7 +53,7 @@ export const contracts: { [key: string]: { [key: string]: ContractConfig } } = {
             abi: EventManagerAbi.abi as AbiItem[]
         },
         NFTMarketplace: {
-            address: "0xa502056CC09096C8DC41211fAd533bC56cDEf694",
+            address: "0x5601d6D2b8bb6134060378280eACA7863019f2D8",
             abi: NFTMarketplaceAbi.abi as AbiItem[]
         },
         NFTBids: {
@@ -60,7 +61,7 @@ export const contracts: { [key: string]: { [key: string]: ContractConfig } } = {
             abi: NFTBidsAbi.abi as AbiItem[]
         },
         NFTWithRoyalties: {
-            address: "0xe3312D9Ca4C5EFC28f99Fce8E757a68E4da2e177",
+            address: "0xf477870d8bD2EF1f0460b0C2d34bc1cD10e424aD",
             abi: NFTWithRoyaltiesAbi.abi as AbiItem[]
         }
     }

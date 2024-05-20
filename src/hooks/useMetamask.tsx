@@ -1,30 +1,61 @@
-import { useEffect, useState } from "react";
-import Web3 from "web3";
+// src/hooks/useMetamask.ts
+import { useState, useEffect, createContext, useContext } from 'react';
+import Web3 from 'web3';
+
+interface MetaMaskContextProps {
+  web3: Web3 | null;
+  accounts: string[];
+  connect: () => Promise<void>;
+}
+
+const MetaMaskContext = createContext<MetaMaskContextProps | undefined>(undefined);
 
 export const useMetaMask = () => {
+  const context = useContext(MetaMaskContext);
+  if (!context) {
+    throw new Error('useMetaMask must be used within a MetaMaskProvider');
+  }
+  return context;
+};
+
+export const MetaMaskProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [web3, setWeb3] = useState<Web3 | null>(null);
   const [accounts, setAccounts] = useState<string[]>([]);
 
+  const connect = async () => {
+    if (window.ethereum) {
+      const web3Instance = new Web3(window.ethereum);
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const accounts = await web3Instance.eth.getAccounts();
+        setWeb3(web3Instance);
+        setAccounts(accounts);
+      } catch (error) {
+        console.error('User denied account access', error);
+      }
+    } else {
+      console.error('No Ethereum provider detected. Install MetaMask.');
+    }
+  };
+
   useEffect(() => {
-    const connectMetaMask = async () => {
+    const initialize = async () => {
       if (window.ethereum) {
-        try {
-          await window.ethereum.request({ method: "eth_requestAccounts" });
-          const web3Instance = new Web3(window.ethereum);
-          setWeb3(web3Instance);
-          const accounts = await web3Instance.eth.getAccounts();
-          setAccounts(accounts);
-          console.log("Accounts retrieved:", accounts);
-        } catch (error) {
-          console.error("User denied account access or there was an error:", error);
-        }
+        const web3Instance = new Web3(window.ethereum);
+        const accounts = await web3Instance.eth.getAccounts();
+        setWeb3(web3Instance);
+        setAccounts(accounts);
       } else {
-        console.error("MetaMask not detected");
+        console.error('No Ethereum provider detected. Install MetaMask.');
       }
     };
-
-    connectMetaMask();
+    initialize();
   }, []);
 
-  return { web3, accounts };
+  return (
+    <MetaMaskContext.Provider value={{ web3, accounts, connect }}>
+      {children}
+    </MetaMaskContext.Provider>
+  );
 };
+

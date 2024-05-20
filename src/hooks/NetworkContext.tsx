@@ -1,8 +1,9 @@
+// src/hooks/NetworkContext.tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import Web3 from 'web3';
 import { web3Sepolia, web3Matic, NFTContractSepolia, NFTContractMatic } from '../web3';
 
-type Network = 'sepolia' | 'amoy';
+export type Network = 'sepolia' | 'amoy';
 
 interface NetworkContextProps {
   web3: Web3;
@@ -46,6 +47,7 @@ export const NetworkProvider: React.FC<{ children: ReactNode }> = ({ children })
     </NetworkContext.Provider>
   );
 };
+
 
 
 

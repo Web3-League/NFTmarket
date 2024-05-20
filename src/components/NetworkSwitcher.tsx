@@ -1,5 +1,6 @@
-import React from 'react';
-import { useNetwork } from '../hooks/NetworkContext';
+// src/components/NetworkSwitcher.tsx
+import React from "react";
+import { useNetwork } from "../hooks/NetworkContext";
 
 const NetworkSwitcher: React.FC = () => {
   const { network, switchNetwork } = useNetwork();
@@ -24,4 +25,5 @@ const NetworkSwitcher: React.FC = () => {
 };
 
 export default NetworkSwitcher;
+
 

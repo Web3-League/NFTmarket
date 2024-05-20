@@ -1,3 +1,4 @@
+// src/components/Navbar.tsx
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link as RouterLink } from 'react-router-dom';
+import MetaMaskConnect from '../MetamaskConnect';
 
 const Navbar: React.FC = () => {
   return (
@@ -26,22 +28,15 @@ const Navbar: React.FC = () => {
         <Button color="inherit" component={RouterLink} to="/contact">
           Contact
         </Button>
-        <Button color="inherit" component={RouterLink} to="/mynfts">
-          My NFTs
-        </Button>
-        <Button color="inherit" component={RouterLink} to="/Market">
+        <Button color="inherit" component={RouterLink} to="/market">
           Market
         </Button>
-        <Button color="inherit" component={RouterLink} to="/sellnft">
-          Sell NFT
-        </Button>
-        <Button color="inherit" component={RouterLink} to="/ManageOffers">
-          Manage Offers
-        </Button>
+        <MetaMaskConnect />
       </Toolbar>
     </AppBar>
   );
 };
 
 export default Navbar;
+
 
